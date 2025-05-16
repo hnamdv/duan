@@ -12,6 +12,8 @@ import ENTITY.NguoiDung;
  * @author Admin
  */
   public interface NguoiDungDAO extends CRUDDAO<NguoiDung, Integer> {
-    boolean checkLogin(String tenDangNhap, String matKhau);
+    boolean checkLogin(String maNhanvien, String matKhau);
     boolean doiMatKhau(int maNhanVien, String matKhauMoi);
+        NguoiDung findByTenNguoiDung(String tenNguoiDung);
+
 }
