@@ -34,25 +34,28 @@ this.dispose();
 }
 @Override
 public void save() {
-    String maNhanVien = txtUsername.getText().trim();
-    String MatKhau = new String(txtPassword.getText());
-    String MatKhauMoi = new String(txtNewpass.getText());
+    try {
+        int maNhanVien = Integer.parseInt(txtUsername.getText().trim());
+        String matKhau = new String(txtPassword.getText());
+        String matKhauMoi = new String(txtNewpass.getText());
 
-NguoiDungDAO dao = new NguoiDungDAOImpl();
-      NguoiDung nd = dao.findByTenNguoiDung(maNhanVien);
+        NguoiDung nd = dao.findById(maNhanVien); 
         if (nd == null) {
-            XDialog.alert( "Mã nhân viên không tồn tại!");
+            XDialog.alert("Mã nhân viên không tồn tại!");
             return;
         }
-        if (!MatKhau.equals(nd.getMatKhau())) {
+        
+        if (!matKhau.equals(nd.getMatKhau())) {
             XDialog.alert("Sai mật khẩu cũ!");
             return;
         }
-        nd.setMatKhau(MatKhauMoi);
+        
+        nd.setMatKhau(matKhauMoi);
         dao.update(nd); 
-        XDialog.alert( "Đổi mật khẩu thành công!");{
-    return;
-    } 
+        XDialog.alert("Đổi mật khẩu thành công!");
+    } catch (NumberFormatException e) {
+        XDialog.alert("Mã nhân viên phải là số!");
+    }
 }
     /**
      * This method is called from within the constructor to initialize the form.

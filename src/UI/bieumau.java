@@ -11,6 +11,8 @@ import ENTITY.NguoiDung;
 import UI.Controller.XAuth;
 import UI.Controller.loginctr;
 import UTIL.XDialog;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  *
@@ -23,35 +25,66 @@ public class bieumau extends javax.swing.JFrame implements loginctr{
      */
     public bieumau() {
         initComponents();
+        tenng();
     }
     @Override
   public void open() {
-    this.setLocationRelativeTo(null);
+       this.setLocationRelativeTo(null);
     this.setVisible(true);
 }
-
+private void tenng() {
+    txtUsername.addFocusListener(new FocusAdapter() {
+        @Override
+        public void focusLost(FocusEvent e) {
+            loadNhanVienInfo();
+        }
+    });
+}
+private void loadNhanVienInfo() {
+    try {
+        String username = txtUsername.getText().trim();
+        if (!username.isEmpty()) {
+            int maNhanVien = Integer.parseInt(username);
+            NguoiDungDAO dao = new NguoiDungDAOImpl();
+            NguoiDung nd = dao.findById(maNhanVien);
+            
+            if (nd != null) {
+                txtten.setText(nd.getTenNguoiDung()); 
+            } else {
+                txtten.setText("");
+                XDialog.alert("Mã nhân viên không tồn tại!");
+            }
+        }
+    } catch (NumberFormatException ex) {
+        txtten.setText("");
+        XDialog.alert("Mã nhân viên phải là số!");
+    }
+}
     /**
      *
      * @return
      */
-    public void login() {
+   public void login() {
     try {
         int maNhanVien = Integer.parseInt(txtUsername.getText().trim());
         String matKhau = new String(txtPassword.getText());
-
         NguoiDungDAO dao = new NguoiDungDAOImpl();
-
-      NguoiDung nd = dao.findById(maNhanVien);
+        NguoiDung nd = dao.findById(maNhanVien);
+        
         if (nd == null) {
-            XDialog.alert( "Mã nhân viên không tồn tại!");
-            
+            XDialog.alert("Mã nhân viên không tồn tại!");
+            return; 
         }
+        
         if (!matKhau.equals(nd.getMatKhau())) {
-            XDialog.alert( "Sai mật khẩu!");
+            XDialog.alert("Sai mật khẩu!");
+            return; 
         }
+        
+        XDialog.alert("Đăng nhập thành công!");
+        
     } catch (NumberFormatException e) {
-        XDialog.alert( "Mã nhân viên phải là số!");
-
+        XDialog.alert("Mã nhân viên phải là số!");
     }
 }
     /**
