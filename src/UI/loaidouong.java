@@ -45,6 +45,15 @@ public void fillToTable() {
     }
 }
 
+public void nhan(int i){
+    list = dao.findAll();
+    LoaiDoUong ldu = list.get(i);
+    txtma.setText(String.valueOf(ldu.getMaLoaiDoUong()));
+    txtten.setText(ldu.getTenLoaiDoUong());
+    
+    
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,6 +71,14 @@ public void fillToTable() {
         btnXoa = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
+        btndau = new javax.swing.JButton();
+        btntruoc = new javax.swing.JButton();
+        btnsau = new javax.swing.JButton();
+        btnccuoi = new javax.swing.JButton();
+        txtten = new javax.swing.JTextField();
+        txtma = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -78,6 +95,11 @@ public void fillToTable() {
                 "MaLoai", "Tên Loại"
             }
         ));
+        tblloai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblloaiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblloai);
 
         btnSua.setText("Sửa");
@@ -108,38 +130,82 @@ public void fillToTable() {
             }
         });
 
+        btndau.setText("Đầu ");
+
+        btntruoc.setText("Trước");
+
+        btnsau.setText("Sau");
+
+        btnccuoi.setText("Cuối");
+
+        jLabel1.setText("Mã");
+
+        jLabel2.setText("Tên L:oại");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnXoa)
-                    .addComponent(btnThem)
-                    .addComponent(btnMoi)
-                    .addComponent(btnSua))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnXoa)
+                            .addComponent(btnThem)
+                            .addComponent(btnMoi)
+                            .addComponent(btnSua))
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btndau)
+                                .addGap(18, 18, 18)
+                                .addComponent(btntruoc)
+                                .addGap(180, 180, 180)
+                                .addComponent(btnsau)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnccuoi))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(btnThem)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSua)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnXoa)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMoi))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(212, 212, 212)
+                .addComponent(btnThem)
+                .addGap(18, 18, 18)
+                .addComponent(btnSua)
+                .addGap(18, 18, 18)
+                .addComponent(btnXoa)
+                .addGap(29, 29, 29)
+                .addComponent(btnMoi)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btndau)
+                    .addComponent(btntruoc)
+                    .addComponent(btnsau)
+                    .addComponent(btnccuoi))
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -189,6 +255,14 @@ public void fillToTable() {
 
     }//GEN-LAST:event_btnMoiActionPerformed
 
+    private void tblloaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblloaiMouseClicked
+        // TODO add your handling code here:
+        int chon = tblloai.getSelectedRow();
+        if (chon == 0){
+            nhan(chon);
+        }
+    }//GEN-LAST:event_tblloaiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -227,8 +301,16 @@ public void fillToTable() {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnccuoi;
+    private javax.swing.JButton btndau;
+    private javax.swing.JButton btnsau;
+    private javax.swing.JButton btntruoc;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblloai;
+    private javax.swing.JTextField txtma;
+    private javax.swing.JTextField txtten;
     // End of variables declaration//GEN-END:variables
 }
