@@ -186,21 +186,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x110;&#x1ea7;u "/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btndauActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btntruoc">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tr&#x1b0;&#x1edb;c"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btntruocActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnsau">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sau"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnsauActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnccuoi">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cu&#x1ed1;i"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnccuoiActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtten">
     </Component>
