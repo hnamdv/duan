@@ -10,6 +10,6 @@ import ENTITY.LoaiDoUong;
  *
  * @author Admin
  */
-public interface LoaiDoUongctr  {
+public interface LoaiDoUongctr extends CrudController<LoaiDoUong, Object>{
     
 }
