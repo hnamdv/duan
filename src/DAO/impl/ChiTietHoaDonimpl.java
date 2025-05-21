@@ -17,13 +17,26 @@ import UTIL.XQuery;
 import java.util.List;
 
 public class ChiTietHoaDonimpl implements ChiTietHoaDonDAO {
-    String createSql = "INSERT INTO ChiTietHoaDon (Id, MaHoaDon, MaDoUong, SoLuong, DonGia) VALUES (?, ?, ?, ?, ?)";
-    String updateSql = "UPDATE ChiTietHoaDon SET MaHoaDon=?, MaDoUong=?, SoLuong=?, DonGia=? WHERE Id=?";
-    String deleteSql = "DELETE FROM ChiTietHoaDon WHERE Id=?";
-    String findAllSql = "SELECT * FROM ChiTietHoaDon";
-    String findByIdSql = "SELECT * FROM ChiTietHoaDon WHERE Id=?";
-    String findByHoaDonSql = "SELECT * FROM ChiTietHoaDon WHERE MaHoaDon=?";
-    String findByDoUongSql = "SELECT * FROM ChiTietHoaDon WHERE MaDoUong=?";
+  // Thêm chi tiết hóa đơn
+String createSql = "INSERT INTO ChiTietHoaDon (Id, MaHoaDon, MaDoUong, SoLuong, DonGia) VALUES (?, ?, ?, ?, ?)";
+
+// Cập nhật chi tiết hóa đơn theo Id
+String updateSql = "UPDATE ChiTietHoaDon SET MaHoaDon = ?, MaDoUong = ?, SoLuong = ?, DonGia = ? WHERE Id = ?";
+
+// Xóa chi tiết hóa đơn theo Id
+String deleteSql = "DELETE FROM ChiTietHoaDon WHERE Id = ?";
+
+// Lấy tất cả chi tiết hóa đơn
+String findAllSql = "SELECT * FROM ChiTietHoaDon";
+
+// Tìm chi tiết hóa đơn theo Id
+String findByIdSql = "SELECT * FROM ChiTietHoaDon WHERE Id = ?";
+
+// Tìm chi tiết hóa đơn theo mã hóa đơn
+String findByHoaDonSql = "SELECT * FROM ChiTietHoaDon WHERE MaHoaDon = ?";
+
+// Tìm chi tiết hóa đơn theo mã đồ uống
+String findByDoUongSql = "SELECT * FROM ChiTietHoaDon WHERE MaDoUong = ?";
 
     @Override
     public ChiTietHoaDon create(ChiTietHoaDon entity) {

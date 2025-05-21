@@ -26,10 +26,8 @@ public class Test{
 
 
     private static void themMoi() {
-        String sql = "INSERT INTO LoaiDoUong (MaLoaiDoUong, TenLoaiDoUong) VALUES (?, ?)";
-        XJdbc.executeUpdate(sql, 1, "Cà phê");
-        XJdbc.executeUpdate(sql, 2, "Sinh tố");
-        System.out.println("Đã thêm loại đồ uống");
+        String sql = "INSERT INTO NguoiDung (MaNhanVien, TenNguoiDung) VALUES (123, Nam Dep Trai)";
+       
     }
 
     private static void truyVanNhieuBanGhi() {

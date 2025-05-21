@@ -17,23 +17,32 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.parser.Entity;
+import jdk.jfr.Category;
 
 /**
  *
  * @author Admin
  */
 public class loaidouong extends javax.swing.JFrame  implements LoaiDoUongctr {
-
+    LoaiDoUongDAO dao = new LoaiDoUongimql();
+    List<LoaiDoUong> list = new ArrayList<>();
     /**
      * Creates new form loaidouong
      */
     public loaidouong() {
         initComponents();
     }
-    LoaiDoUongDAO dao = new LoaiDoUongimql();
-List<LoaiDoUong> list = new ArrayList<>();
+    @Override
+    public void edit() {
+LoaiDoUong entity = list.get(tblloai.getSelectedRow());
+this.setForm(entity);
 
-public void fillToTable() {
+
+}
+
+    @Override
+    public void fillToTable() {
     DefaultTableModel model = (DefaultTableModel) tblloai.getModel();
     model.setRowCount(0);
     list = dao.findAll();
@@ -45,14 +54,7 @@ public void fillToTable() {
     }
 }
 
-public void nhan(int i){
-    list = dao.findAll();
-    LoaiDoUong ldu = list.get(i);
-    txtma.setText(String.valueOf(ldu.getMaLoaiDoUong()));
-    txtten.setText(ldu.getTenLoaiDoUong());
-    
-    
-}
+
 @Override
 public void moveFirst() {
 this.moveTo(0);
@@ -286,16 +288,13 @@ this.moveTo(tblloai.getRowCount() - 1);
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         // TODO add your handling code here:
-        btnMoi.addActionListener(e -> fillToTable());
+        fillToTable();
 
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void tblloaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblloaiMouseClicked
         // TODO add your handling code here:
-        int chon = tblloai.getSelectedRow();
-        if (chon == 0){
-            nhan(chon);
-        }
+     edit();
     }//GEN-LAST:event_tblloaiMouseClicked
 
     private void btndauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndauActionPerformed
@@ -369,40 +368,12 @@ this.moveTo(tblloai.getRowCount() - 1);
     private javax.swing.JTextField txtten;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public List<LoaiDoUong> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public LoaiDoUong findById(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void add(LoaiDoUong entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update(LoaiDoUong entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void delete(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public void open() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void edit() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public void create() {
@@ -446,8 +417,6 @@ this.moveTo(tblloai.getRowCount() - 1);
 
 
 
-
-
     @Override
     public void moveTo(int rowIndex) {
         if(rowIndex<0){
@@ -460,4 +429,22 @@ this.moveTo(tblloai.getRowCount() - 1);
             this.edit();
         }
     }
+
+
+
+    @Override
+    public LoaiDoUong getForm() {
+      LoaiDoUong entity = new LoaiDoUong();
+      entity.setMaLoaiDoUong(Integer.parseInt(txtma.getText()));
+      entity.setTenLoaiDoUong(txtten.getText());
+        return entity;
+    }
+
+    @Override
+    public void setForm(LoaiDoUong entity) {
+        txtma.setText(String.valueOf(entity.getMaLoaiDoUong()));
+        txtten.setText(entity.getTenLoaiDoUong());
+    }
+
+    
 }

@@ -2,14 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package UI.Controller;
-
-import ENTITY.LoaiDoUong;
+package poly.cafe.ui;
 
 /**
  *
- * @author Admin
+ * @author baoha
  */
-public interface LoaiDoUongctr extends CrudController<LoaiDoUong>{
-    
+public interface WelcomeController {
+    void waiting();
 }

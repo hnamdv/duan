@@ -5,17 +5,13 @@
 package UI.Controller;
 
 import java.util.List;
+import javax.swing.text.html.parser.Entity;
 
 /**
  *
  * @author Admin
  */
-public interface CrudController <T,ID> {
-    List<T> getAll();
-    T findById(ID id);
-    void add(T entity);
-    void update(T entity);
-    void delete(ID id);
+public interface CrudController <Entity> {
     void open(); // Xử lý mở cửa sổ
     void fillToTable(); // Tải dữ liệu và đổ lên bảng
     void edit(); // Hiển thị dữ liệu của hàng được chọn lên form
@@ -32,4 +28,6 @@ public interface CrudController <T,ID> {
     void moveNext(); // Hiển thị thực thể kế sau
     void moveLast(); // Hiển thị thực thể cuối cùng
     void moveTo(int rowIndex); // Hiển thị thực thể tại vị trí
+    void setForm(Entity entity); // Hiển thị thực thể lên form
+     Entity getForm(); // Tạo thực thể từ dữ liệu form
 }
