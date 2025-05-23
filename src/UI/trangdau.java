@@ -4,17 +4,47 @@
  */
 package UI;
 
+import static javax.swing.Spring.width;
+
 /**
  *
  * @author Admin
  */
 public class trangdau extends javax.swing.JFrame {
+    // 168 w . 501h
 
     /**
      * Creates new form trangdau
      */
     public trangdau() {
         initComponents();
+
+    }
+
+    void Openmenu(){
+          int width = 168 ;
+    int height = 501;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0; i < width; i ++  ){
+                pnMain.setSize(width, height);
+            }
+            }
+        }).start();
+    }
+    
+    void offmenu(){
+                 int width = 168 ;
+    int height = 501;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = WIDTH ; i > 0 ; i --   ){
+                pnMain.setSize(i, height);
+            }
+            }
+        }).start();
     }
 
     /**
@@ -26,21 +56,171 @@ public class trangdau extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnMain = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        home = new javax.swing.JPanel();
+        loaidouonh = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnMain.setBackground(new java.awt.Color(153, 153, 153));
+        pnMain.setPreferredSize(new java.awt.Dimension(800, 500));
+
+        jLabel1.setText("Trang Chủ");
+
+        jLabel2.setText("LoaiDoUong");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        jLabel3.setText("Đổi Mật Khẩu");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
+        jLabel4.setText("tắt");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
+        pnMain.setLayout(pnMainLayout);
+        pnMainLayout.setHorizontalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnMainLayout.setVerticalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel2)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout homeLayout = new javax.swing.GroupLayout(home);
+        home.setLayout(homeLayout);
+        homeLayout.setHorizontalGroup(
+            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 630, Short.MAX_VALUE)
+        );
+        homeLayout.setVerticalGroup(
+            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 418, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(home, "card2");
+
+        jLabel6.setText("douong");
+
+        javax.swing.GroupLayout loaidouonhLayout = new javax.swing.GroupLayout(loaidouonh);
+        loaidouonh.setLayout(loaidouonhLayout);
+        loaidouonhLayout.setHorizontalGroup(
+            loaidouonhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loaidouonhLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(404, Short.MAX_VALUE))
+        );
+        loaidouonhLayout.setVerticalGroup(
+            loaidouonhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loaidouonhLayout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(loaidouonh, "card3");
+
+        jLabel7.setText("Menu");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel7)
+                .addGap(33, 33, 33)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        Openmenu();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        offmenu();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        loaidouong ldu = new loaidouong();
+        ldu.setVisible(true);
+        home.setVisible(false);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+         doimatkhau dmk = new doimatkhau();
+       dmk.setLocationRelativeTo(null);
+        dmk.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +258,15 @@ public class trangdau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel home;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel loaidouonh;
+    private javax.swing.JPanel pnMain;
     // End of variables declaration//GEN-END:variables
 }
