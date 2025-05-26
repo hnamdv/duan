@@ -4,6 +4,8 @@
  */
 package UI;
 
+import UI.loaidouongpanel;
+import java.awt.CardLayout;
 import static javax.swing.Spring.width;
 
 /**
@@ -18,6 +20,10 @@ public class trangdau extends javax.swing.JFrame {
      */
     public trangdau() {
         initComponents();
+ loaidouongpanel home = new loaidouongpanel();
+trangdau log = new trangdau();
+jPanel2.add(home, "home");
+jPanel2.add(log, "log");
 
     }
 
@@ -57,14 +63,11 @@ public class trangdau extends javax.swing.JFrame {
     private void initComponents() {
 
         pnMain = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        trangcchu = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        home = new javax.swing.JPanel();
-        loaidouonh = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,7 +75,12 @@ public class trangdau extends javax.swing.JFrame {
         pnMain.setBackground(new java.awt.Color(153, 153, 153));
         pnMain.setPreferredSize(new java.awt.Dimension(800, 500));
 
-        jLabel1.setText("Trang Chủ");
+        trangcchu.setText("Trang Chủ");
+        trangcchu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trangcchuMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("LoaiDoUong");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,13 +112,13 @@ public class trangdau extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(pnMainLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(trangcchu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,49 +126,15 @@ public class trangdau extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(jLabel1)
+                .addComponent(trangcchu)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel2)
                 .addGap(39, 39, 39)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(472, Short.MAX_VALUE))
         );
 
         jPanel2.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout homeLayout = new javax.swing.GroupLayout(home);
-        home.setLayout(homeLayout);
-        homeLayout.setHorizontalGroup(
-            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
-        );
-        homeLayout.setVerticalGroup(
-            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 418, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(home, "card2");
-
-        jLabel6.setText("douong");
-
-        javax.swing.GroupLayout loaidouonhLayout = new javax.swing.GroupLayout(loaidouonh);
-        loaidouonh.setLayout(loaidouonhLayout);
-        loaidouonhLayout.setHorizontalGroup(
-            loaidouonhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loaidouonhLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(404, Short.MAX_VALUE))
-        );
-        loaidouonhLayout.setVerticalGroup(
-            loaidouonhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loaidouonhLayout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(loaidouonh, "card3");
 
         jLabel7.setText("Menu");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,24 +148,25 @@ public class trangdau extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel7)
-                .addGap(33, 33, 33)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -209,18 +184,20 @@ public class trangdau extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        loaidouong ldu = new loaidouong();
-        ldu.setVisible(true);
-        home.setVisible(false);
+        
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-         doimatkhau dmk = new doimatkhau();
-       dmk.setLocationRelativeTo(null);
-        dmk.setVisible(true);
-        this.dispose();
+      
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void trangcchuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trangcchuMouseClicked
+        // TODO add your handling code here:
+    CardLayout cl = (CardLayout) jPanel2.getLayout();
+        cl.show(jPanel2, "home");
+        
+    }//GEN-LAST:event_trangcchuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -258,15 +235,12 @@ public class trangdau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel home;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel loaidouonh;
     private javax.swing.JPanel pnMain;
+    private javax.swing.JLabel trangcchu;
     // End of variables declaration//GEN-END:variables
 }
