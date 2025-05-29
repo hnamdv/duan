@@ -7,7 +7,9 @@ package UI;
 import DAO.entity.NguoiDungDAO;
 import DAO.impl.NguoiDungDAOImpl;
 import ENTITY.NguoiDung;
+import ENTITY.NhanVien;
 import UI.Controller.loginctr;
+import UI.Panel.nhanvienn;
 import UTIL.XDialog;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -24,9 +26,9 @@ public class dangnhap extends javax.swing.JFrame implements loginctr {
      */
     public dangnhap() {
         initComponents();
-         tenng();
          getClass().getResource("/icon/PoLy_no_background 1");
          this.pack();
+         setLocationRelativeTo(null);
     }
         
 
@@ -35,65 +37,45 @@ public class dangnhap extends javax.swing.JFrame implements loginctr {
        this.setLocationRelativeTo(null);
     this.setVisible(true);
 }
-private void tenng() {
-    txtusername.addFocusListener(new FocusAdapter() {
-        @Override
-        public void focusLost(FocusEvent e) {
-            loadNhanVienInfo();
-        }   
-    });
-}
-private void loadNhanVienInfo() {
-    try {
-        String username = txtusername.getText().trim();
-        if (!username.isEmpty()) {
-            int maNhanVien = Integer.parseInt(username);
-            NguoiDungDAO dao = new NguoiDungDAOImpl();
-            NguoiDung nd = dao.findById(maNhanVien);
-            
-            if (nd != null) {
-                txtten.setText(nd.getTenNguoiDung()); 
-            } else {
-                txtten.setText("");
-                XDialog.alert("Mã nhân viên không tồn tại!");
-            }
-        }
-    } catch (NumberFormatException ex) {
-        txtten.setText("");
-        XDialog.alert("Mã nhân viên phải là số!");
-    }
-}
+
     /**
      *
      * @return
      */
-   public void login() {
+ 
+public void login() {
     try {
         int maNhanVien = Integer.parseInt(txtusername.getText().trim());
-        String matKhau = new String(txtmk.getText());
+        String matKhau = new String(txtmk.getPassword()); // nên dùng getPassword thay vì getText
+
         NguoiDungDAO dao = new NguoiDungDAOImpl();
         NguoiDung nd = dao.findById(maNhanVien);
-        
         if (nd == null) {
-            XDialog.alert("Mã nhân viên không tồn tại!");
-            return; 
+            XDialog.alert( "Mã nhân viên không tồn tại!");
+            return;
         }
-        
+
         if (!matKhau.equals(nd.getMatKhau())) {
-            XDialog.alert("Sai mật khẩu!");
-            return; 
+            XDialog.alert( "Sai mật khẩu!");
+            return;
         }
-        
+
         XDialog.alert("Đăng nhập thành công!");
-           trangdau main = new trangdau();
-        main.setLocationRelativeTo(null);
-        main.setVisible(true);
-        this.dispose();
-        
+            // Kiểm tra chức vụ
+     
+if (nd.equals(nd)) { 
+  XDialog.alert("Chào quản lý: " + nd.getTenNguoiDung());
+  
+} else {
+    XDialog.alert("Chào nhân viên: " + nd.getTenNguoiDung());
+    new nhanvienn().setVisible(true);
+  
+}
     } catch (NumberFormatException e) {
         XDialog.alert("Mã nhân viên phải là số!");
     }
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,13 +93,12 @@ private void loadNhanVienInfo() {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtten = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         txtmk = new javax.swing.JPasswordField();
         cbmat = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(244, 162, 97));
 
         jPanel1.setBackground(new java.awt.Color(105, 105, 105));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 250));
@@ -163,14 +144,6 @@ private void loadNhanVienInfo() {
             }
         });
 
-        txtten.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txttenActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Tên Nhân Viên");
-
         jButton2.setBackground(new java.awt.Color(105, 105, 105));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Exit");
@@ -181,7 +154,6 @@ private void loadNhanVienInfo() {
             }
         });
 
-        txtmk.setText("jPasswordField1");
         txtmk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmkActionPerformed(evt);
@@ -189,6 +161,16 @@ private void loadNhanVienInfo() {
         });
 
         cbmat.setText("mat");
+        cbmat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbmatMouseClicked(evt);
+            }
+        });
+        cbmat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbmatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,13 +189,11 @@ private void loadNhanVienInfo() {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtusername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtten)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 279, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -234,11 +214,7 @@ private void loadNhanVienInfo() {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtusername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(4, 4, 4)
-                .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(90, 90, 90)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,11 +235,6 @@ private void loadNhanVienInfo() {
         login();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txttenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttenActionPerformed
-        // TODO add your handling code here:
-     
-    }//GEN-LAST:event_txttenActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 exit();
         // TODO add your handling code here:
@@ -279,6 +250,21 @@ if (cbmat.isSelected()) {
 
     
     }//GEN-LAST:event_txtmkActionPerformed
+
+    private void cbmatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmatActionPerformed
+        // TODO add your handling code here:
+           if (cbmat.isSelected()) {
+            txtmk.setEchoChar((char) 0); // Hiện mật khẩu
+        } else {
+            txtmk.setEchoChar('•'); // Ẩn mật khẩu (ký tự dấu chấm hoặc mặc định)
+        }
+    
+    }//GEN-LAST:event_cbmatActionPerformed
+
+    private void cbmatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbmatMouseClicked
+        // TODO add your handling code here:
+        cbmat.setText("Hiện mật khẩu");
+    }//GEN-LAST:event_cbmatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -322,11 +308,9 @@ if (cbmat.isSelected()) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtmk;
-    private javax.swing.JTextField txtten;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 }
