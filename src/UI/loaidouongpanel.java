@@ -236,6 +236,25 @@ this.moveTo(tblloai.getRowCount() - 1);
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblloai.getSelectedRow();
+        if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một mục để sửa.", "Lỗi", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    // Lấy MaID từ cột phù hợp trên bảng (ví dụ: cột đầu tiên - index 0)
+    // maIDCanSua = jTableData.getValueAt(selectedRow, 0).toString();
+
+    // 2. Hiển thị hộp thoại xác nhận
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Bạn có chắc chắn muốn sửa thông tin này không?",
+        "Xác nhận sửa",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE
+    );
+
+    // 3. Xử lý kết quả xác nhận
+    if (confirm == JOptionPane.YES_OPTION) {
         btnSua.addActionListener(e -> {
             int row = tblloai.getSelectedRow();
             if (row >= 0) {
@@ -245,11 +264,36 @@ this.moveTo(tblloai.getRowCount() - 1);
                 fillToTable();
             }
         });
+
+        JOptionPane.showMessageDialog(this, "Sửa thông tin thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+      
+    }
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
- 
+ int selectedRow = tblloai.getSelectedRow(); // Giả sử JTable của bạn tên là jTableData
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một mục để xóa.", "Lỗi", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Lấy mã định danh từ cột phù hợp trên bảng (ví dụ: cột đầu tiên - index 0)
+    String maIDCanXoa = tblloai.getValueAt(selectedRow, 0).toString(); // Thay 0 bằng index cột ID thực tế
+
+    // 2. Hiển thị hộp thoại xác nhận
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Bạn có chắc chắn muốn xóa mục có mã: " + maIDCanXoa + " này không?",
+        "Xác nhận xóa",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE
+    );
+
+    // 3. Xử lý kết quả xác nhận
+    if (confirm == JOptionPane.YES_OPTION) {
         btnXoa.addActionListener(e -> {
             int row = tblloai.getSelectedRow();
             if (row >= 0) {
@@ -258,6 +302,11 @@ this.moveTo(tblloai.getRowCount() - 1);
                 fillToTable();
             }
         });
+
+        JOptionPane.showMessageDialog(this, "Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
