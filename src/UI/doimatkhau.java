@@ -22,6 +22,7 @@ public class doimatkhau extends javax.swing.JFrame implements doimatkhauctr{
      */
     public doimatkhau() {
         initComponents();
+        getClass().getResource("/img/login.png");
     }
     NguoiDungDAO dao = new NguoiDungDAOImpl();
 @Override
@@ -143,7 +144,7 @@ public void save() {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
