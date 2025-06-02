@@ -5,7 +5,9 @@
 package UI;
 
 import DAO.entity.NguoiDungDAO;
+import DAO.entity.NhanVienDAO;
 import DAO.impl.NguoiDungDAOImpl;
+import DAO.impl.NhanVienimpl;
 import ENTITY.NguoiDung;
 import ENTITY.NhanVien;
 import UI.Controller.loginctr;
@@ -28,7 +30,6 @@ public class dangnhap extends javax.swing.JFrame implements loginctr {
      */
     public dangnhap() {
         initComponents();
-    getClass().getResource("/img/dangnhap.png");
          this.pack();
          setLocationRelativeTo(null);
     }
@@ -45,38 +46,45 @@ public class dangnhap extends javax.swing.JFrame implements loginctr {
      * @return
      */
  
-public void login() {
+    @Override
+    public void login() {
     try {
         int maNhanVien = Integer.parseInt(txtusername.getText().trim());
-        String matKhau = new String(txtmk.getPassword()); // nên dùng getPassword thay vì getText
+        String matKhau = new String(txtmk.getPassword()).trim();
 
-        NguoiDungDAO dao = new NguoiDungDAOImpl();
-        NguoiDung nd = dao.findById(maNhanVien);
-        if (nd == null) {
-            XDialog.alert( "Mã nhân viên không tồn tại!");
+        if (String.valueOf(maNhanVien).isEmpty() || matKhau.isEmpty()) {
+            XDialog.alert("Vui lòng nhập đầy đủ mã nhân viên và mật khẩu!");
             return;
         }
 
-        if (!matKhau.equals(nd.getMatKhau())) {
-            XDialog.alert( "Sai mật khẩu!");
+        NhanVienDAO dao = new NhanVienimpl();
+        boolean loginSuccess = dao.checkLogin(maNhanVien, matKhau);
+
+        if (!loginSuccess) {
+            XDialog.alert("Mã nhân viên hoặc mật khẩu sai!");
             return;
         }
 
+        NhanVien nv = dao.findById(maNhanVien);
         XDialog.alert("Đăng nhập thành công!");
-            // Kiểm tra chức vụ
-     
-if (nd.equals(nd)) { 
-  XDialog.alert("Chào quản lý: " + nd.getTenNguoiDung());
-  
-} else {
-    XDialog.alert("Chào nhân viên: " + nd.getTenNguoiDung());
-    new nhanvienn().setVisible(true);
-  
-}
+
+        if (nv.isChucVu()) {
+            XDialog.alert("Chào quản lý: " + nv.getTenDangNhap());
+            new quanly().setVisible(true);
+        } else {
+            XDialog.alert("Chào nhân viên: " + nv.getTenDangNhap());
+            new nhanvienn().setVisible(true);
+        }
+
     } catch (NumberFormatException e) {
         XDialog.alert("Mã nhân viên phải là số!");
+    } catch (Exception e) {
+        e.printStackTrace();
+        XDialog.alert("Lỗi hệ thống khi đăng nhập!");
     }
 }
+
+
 
 
     /**
@@ -99,7 +107,7 @@ if (nd.equals(nd)) {
         setBackground(new java.awt.Color(244, 162, 97));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/dangnhap.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dangnhap.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         txtusername.setPreferredSize(new java.awt.Dimension(70, 20));
