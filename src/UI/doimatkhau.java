@@ -5,8 +5,11 @@
 package UI;
 
 import DAO.entity.NguoiDungDAO;
+import DAO.entity.NhanVienDAO;
 import DAO.impl.NguoiDungDAOImpl;
+import DAO.impl.NhanVienimpl;
 import ENTITY.NguoiDung;
+import ENTITY.NhanVien;
 import UI.Controller.XAuth;
 import UI.Controller.doimatkhauctr;
 import UTIL.XDialog;
@@ -22,7 +25,6 @@ public class doimatkhau extends javax.swing.JFrame implements doimatkhauctr{
      */
     public doimatkhau() {
         initComponents();
-        getClass().getResource("/img/login.png");
     }
     NguoiDungDAO dao = new NguoiDungDAOImpl();
 @Override
@@ -33,31 +35,49 @@ this.setLocationRelativeTo(null);
 public void close() {
 this.dispose();
 }
+
 @Override
 public void save() {
     try {
         int maNhanVien = Integer.parseInt(txtUsername.getText().trim());
-        String matKhau = new String(txtPassword.getText());
-        String matKhauMoi = new String(txtNewpass.getText());
+        String matKhauCu = new String(pass.getPassword()).trim();
+        String matKhauMoi = new String(pass2.getPassword()).trim();
+        String xacNhanMK = new String(pass3.getPassword()).trim();
 
-        NguoiDung nd = dao.findById(maNhanVien); 
-        if (nd == null) {
+        if (!matKhauMoi.equals(xacNhanMK)) {
+            XDialog.alert("Xác nhận mật khẩu mới không khớp!");
+            return;
+        }
+
+        NhanVienDAO dao = new NhanVienimpl();
+        NhanVien nv = dao.findById(maNhanVien);
+
+        if (nv == null) {
             XDialog.alert("Mã nhân viên không tồn tại!");
             return;
         }
-        
-        if (!matKhau.equals(nd.getMatKhau())) {
-            XDialog.alert("Sai mật khẩu cũ!");
+
+        if (!matKhauCu.equals(nv.getMatKhau())) {
+            XDialog.alert("Mật khẩu cũ không đúng!");
             return;
         }
-        
-        nd.setMatKhau(matKhauMoi);
-        dao.update(nd); 
-        XDialog.alert("Đổi mật khẩu thành công!");
+
+        boolean success = dao.doiMatKhau(maNhanVien, matKhauMoi);
+        if (success) {
+            XDialog.alert("Đổi mật khẩu thành công!");
+        } else {
+            XDialog.alert("Không thể đổi mật khẩu!");
+        }
+
     } catch (NumberFormatException e) {
         XDialog.alert("Mã nhân viên phải là số!");
+    } catch (Exception e) {
+        e.printStackTrace();
+        XDialog.alert("Có lỗi xảy ra khi đổi mật khẩu!");
     }
+
 }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,25 +89,20 @@ public void save() {
 
         jLabel1 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtNewpass = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        pass2 = new javax.swing.JPasswordField();
+        pass3 = new javax.swing.JPasswordField();
+        pass = new javax.swing.JPasswordField();
+        cb1 = new javax.swing.JCheckBox();
+        cb2 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Nhập mã nhân viên ");
-
-        jLabel3.setText("Mật Khẩu Cũ ");
-
-        jLabel4.setText("Đặt lại mật khẩu ");
-
-        jButton1.setText("Gửi mã ");
-
-        jButton2.setText("Gửi lại mã");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doimkk.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 230, -1));
 
         jButton3.setText("Xác nhận");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -95,57 +110,33 @@ public void save() {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 100, 37));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(906, 64, 37, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButton2))
-                                .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtNewpass, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNewpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        pass2.setText("jPasswordField1");
+        getContentPane().add(pass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+
+        pass3.setText("jPasswordField2");
+        getContentPane().add(pass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, -1));
+
+        pass.setText("jPasswordField3");
+        getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, -1, -1));
+
+        cb1.setText("jCheckBox1");
+        cb1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, 20, -1));
+
+        cb2.setText("jCheckBox2");
+        cb2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 20, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -154,6 +145,22 @@ public void save() {
         // TODO add your handling code here:
    save();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
+        // TODO add your handling code here:
+           char echo = cb1.isSelected() ? 0 : '•';
+        pass.setEchoChar(echo);
+       pass2.setEchoChar(echo);
+        pass3.setEchoChar(echo);
+    }//GEN-LAST:event_cb1ActionPerformed
+
+    private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
+        // TODO add your handling code here:
+              char echo = cb1.isSelected() ? 0 : '•';
+        pass.setEchoChar(echo);
+       pass2.setEchoChar(echo);
+        pass3.setEchoChar(echo);
+    }//GEN-LAST:event_cb2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,14 +199,14 @@ public void save() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox cb1;
+    private javax.swing.JCheckBox cb2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtNewpass;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField pass;
+    private javax.swing.JPasswordField pass2;
+    private javax.swing.JPasswordField pass3;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
