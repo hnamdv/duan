@@ -4,6 +4,10 @@
  */
 package UI.Panel;
 
+import DAO.entity.NhanVienDAO;
+import DAO.impl.NhanVienimpl;
+import ENTITY.NhanVien;
+import UI.Controller.XAuth;
 import UI.dangnhap;
 import UI.loaidouongpanel;
 import UI.trangchu;
@@ -21,12 +25,13 @@ public class nhanvienn extends javax.swing.JFrame {
      * Creates new form nhanvienn
      */
      CardLayout cl;
+   NhanVien nv;
     public nhanvienn() {
         initComponents();
     cl = new CardLayout();
         card.setLayout(cl);
        this.setLocationRelativeTo(null);
-   
+    showThongTin();
     }
 private void Dangxuat() {
     int confirm = JOptionPane.showConfirmDialog(
@@ -43,6 +48,13 @@ private void Dangxuat() {
         dangnhap loginFrame = new dangnhap();
         loginFrame.setLocationRelativeTo(null); // Đặt JFrame đăng nhập ra giữa màn hình
         loginFrame.setVisible(true);
+    }
+}
+private void showThongTin() {
+    if (nv != null) {
+        String chucVuStr = nv.isChucVu() ? "Quản lý" : "Nhân viên";
+        lblchucvu.setText(chucVuStr);
+        lblmnv.setText(String.valueOf(nv.getMaNhanVien()));
     }
 }
     /**
@@ -64,6 +76,8 @@ private void Dangxuat() {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        lblchucvu = new javax.swing.JLabel();
+        lblmnv = new javax.swing.JLabel();
         card = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,6 +137,10 @@ private void Dangxuat() {
             }
         });
 
+        lblchucvu.setText("jLabel4");
+
+        lblmnv.setText("jLabel5");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -132,8 +150,14 @@ private void Dangxuat() {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblmnv, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblchucvu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -154,9 +178,13 @@ private void Dangxuat() {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblchucvu))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblmnv))
                 .addGap(73, 73, 73)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
@@ -272,5 +300,7 @@ private void Dangxuat() {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel lblchucvu;
+    private javax.swing.JLabel lblmnv;
     // End of variables declaration//GEN-END:variables
 }

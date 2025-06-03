@@ -89,6 +89,8 @@ this.moveTo(tblloai.getRowCount() - 1);
         jScrollPane1 = new javax.swing.JScrollPane();
         tblloai = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(0, 255, 255));
+
         jLabel1.setText("Mã");
 
         btnSua.setText("Sửa");

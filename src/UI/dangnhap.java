@@ -47,7 +47,8 @@ public class dangnhap extends javax.swing.JFrame implements loginctr {
      */
  
     @Override
-    public void login() {
+ 
+public void login() {
     try {
         int maNhanVien = Integer.parseInt(txtusername.getText().trim());
         String matKhau = new String(txtmk.getPassword()).trim();
@@ -73,7 +74,7 @@ public class dangnhap extends javax.swing.JFrame implements loginctr {
             new quanly().setVisible(true);
         } else {
             XDialog.alert("Chào nhân viên: " + nv.getTenDangNhap());
-            new nhanvienn().setVisible(true);
+            new nhanvienn().setVisible(true); 
         }
 
     } catch (NumberFormatException e) {
@@ -83,6 +84,7 @@ public class dangnhap extends javax.swing.JFrame implements loginctr {
         XDialog.alert("Lỗi hệ thống khi đăng nhập!");
     }
 }
+
 
 
 

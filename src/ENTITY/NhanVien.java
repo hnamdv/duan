@@ -10,6 +10,16 @@ package ENTITY;
  */
 public class NhanVien {
 
+    public NhanVien(int maNhanVien, String ten, String soDT, Date ngaySinh, boolean chucVu, String tenDangNhap, String matKhau) {
+        this.maNhanVien = maNhanVien;
+        this.ten = ten;
+        this.soDT = soDT;
+        this.ngaySinh = ngaySinh;
+        this.chucVu = chucVu;
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+    }
+
     public int getMaNhanVien() {
         return maNhanVien;
     }
@@ -49,23 +59,39 @@ public class NhanVien {
     public void setChucVu(boolean chucVu) {
         this.chucVu = chucVu;
     }
+
+    public String getTenDangNhap() {
+        return tenDangNhap;
+    }
+
+    public void setTenDangNhap(String tenDangNhap) {
+        this.tenDangNhap = tenDangNhap;
+    }
+
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+
+
    
-    private int maNhanVien;
-    private String ten;
-    private String soDT;
-    private Date ngaySinh;
-    private boolean chucVu;
+private int maNhanVien;
+private String ten;
+private String soDT;
+private Date ngaySinh;
+private boolean chucVu;
+private String tenDangNhap;
+private String matKhau;
+
+
 
     public NhanVien() {
     }
 
-    public NhanVien(int maNhanVien, String ten, String soDT, Date ngaySinh, boolean chucVu) {
-        this.maNhanVien = maNhanVien;
-        this.ten = ten;
-        this.soDT = soDT;
-        this.ngaySinh = ngaySinh;
-        this.chucVu = chucVu;
-    }
+
 
 
 }

@@ -12,4 +12,7 @@ import ENTITY.NhanVien;
  * @author Admin
  */
 public interface NhanVienDAO extends CRUDDAO<NhanVien, Integer> {
+        NhanVien findById(int id);
+    boolean checkLogin(int maNhanVien, String matKhau);
+    boolean doiMatKhau(int maNhanVien, String matKhauMoi);
 }
